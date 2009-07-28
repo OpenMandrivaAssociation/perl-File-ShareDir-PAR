@@ -1,18 +1,16 @@
+%define upstream_name    File-ShareDir-PAR
+%define upstream_version 0.05
 
-%define realname   File-ShareDir-PAR
-%define version    0.05
-%define release    %mkrel 1
+Name:       perl-%{upstream_name}
+Version:    %perl_convert_version %{upstream_version}
+Release:    %mkrel 1
 
-Name:       perl-%{realname}
-Version:    %{version}
-Release:    %{release}
-License:    GPL or Artistic
-Group:      Development/Perl
 Summary:    File::ShareDir with PAR support
-Source:     http://www.cpan.org/modules/by-module/File/%{realname}-%{version}.tar.gz
-Url:        http://search.cpan.org/dist/%{realname}
-BuildRoot:  %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: perl-devel
+License:    GPL+ or Artistic
+Group:      Development/Perl
+Url:        http://search.cpan.org/dist/%{upstream_name}
+Source0:    http://www.cpan.org/modules/by-module/File/%{upstream_name}-%{upstream_version}.tar.gz
+
 BuildRequires: perl(Carp)
 BuildRequires: perl(Class::Inspector)
 BuildRequires: perl(ExtUtils::MakeMaker)
@@ -21,8 +19,8 @@ BuildRequires: perl(File::ShareDir)
 BuildRequires: perl(File::Spec)
 BuildRequires: perl(Params::Util)
 BuildRequires: perl(Test::More)
-
 BuildArch: noarch
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}
 
 %description
 'File::ShareDir::PAR' provides the same functionality as the File::ShareDir
@@ -45,7 +43,7 @@ one of the loaded '.par' files, that containing '.par' file is extracted
 and the path returned will point to the extracted copy on disk.
 
 %prep
-%setup -q -n %{realname}-%{version} 
+%setup -q -n %{upstream_name}-%{upstream_version}
 
 %build
 %{__perl} Makefile.PL INSTALLDIRS=vendor
@@ -66,5 +64,4 @@ rm -rf %buildroot
 %doc LICENSE Changes
 %{_mandir}/man3/*
 %perl_vendorlib/*
-
 
