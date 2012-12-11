@@ -1,26 +1,26 @@
 %define upstream_name    File-ShareDir-PAR
 %define upstream_version 0.06
 
-Name:       perl-%{upstream_name}
-Version:    %perl_convert_version %{upstream_version}
-Release:    %mkrel 2
+Name:		perl-%{upstream_name}
+Version:	%perl_convert_version %{upstream_version}
+Release:	3
 
-Summary:    File::ShareDir with PAR support
-License:    GPL+ or Artistic
-Group:      Development/Perl
-Url:        http://search.cpan.org/dist/%{upstream_name}
-Source0:    http://www.cpan.org/modules/by-module/File/%{upstream_name}-%{upstream_version}.tar.gz
+Summary:	File::ShareDir with PAR support
+License:	GPL+ or Artistic
+Group:		Development/Perl
+Url:		http://search.cpan.org/dist/%{upstream_name}
+Source0:	http://www.cpan.org/modules/by-module/File/%{upstream_name}-%{upstream_version}.tar.gz
 
-BuildRequires: perl(Carp)
-BuildRequires: perl(Class::Inspector)
-BuildRequires: perl(ExtUtils::MakeMaker)
-BuildRequires: perl(File::Path)
-BuildRequires: perl(File::ShareDir)
-BuildRequires: perl(File::Spec)
-BuildRequires: perl(Params::Util)
-BuildRequires: perl(Test::More)
-BuildArch: noarch
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}
+BuildRequires:	perl-devel
+BuildRequires:	perl(Carp)
+BuildRequires:	perl(Class::Inspector)
+BuildRequires:	perl(ExtUtils::MakeMaker)
+BuildRequires:	perl(File::Path)
+BuildRequires:	perl(File::ShareDir)
+BuildRequires:	perl(File::Spec)
+BuildRequires:	perl(Params::Util)
+BuildRequires:	perl(Test::More)
+BuildArch:	noarch
 
 %description
 'File::ShareDir::PAR' provides the same functionality as the File::ShareDir
@@ -46,22 +46,51 @@ and the path returned will point to the extracted copy on disk.
 %setup -q -n %{upstream_name}-%{upstream_version}
 
 %build
-%{__perl} Makefile.PL INSTALLDIRS=vendor
+perl Makefile.PL INSTALLDIRS=vendor
 %make
 
 %check
 make test
 
 %install
-rm -rf %buildroot
 %makeinstall_std
 
-%clean
-rm -rf %buildroot
-
 %files
-%defattr(-,root,root)
 %doc LICENSE Changes
 %{_mandir}/man3/*
-%perl_vendorlib/*
+%{perl_vendorlib}/*
+
+%changelog
+* Sat Apr 23 2011 Funda Wang <fwang@mandriva.org> 0.60.0-2mdv2011.0
++ Revision: 656915
+- rebuild for updated spec-helper
+
+* Thu Nov 11 2010 Guillaume Rousse <guillomovitch@mandriva.org> 0.60.0-1mdv2011.0
++ Revision: 595970
+- update to new version 0.06
+
+* Tue Jul 28 2009 Jérôme Quelin <jquelin@mandriva.org> 0.50.0-1mdv2011.0
++ Revision: 401661
+- rebuild using %%perl_convert_version
+- fixed license field
+
+* Fri May 01 2009 Jérôme Quelin <jquelin@mandriva.org> 0.05-1mdv2010.0
++ Revision: 369686
+- update to new version 0.05
+
+* Tue Mar 03 2009 Guillaume Rousse <guillomovitch@mandriva.org> 0.04-1mdv2009.1
++ Revision: 347688
+- update to new version 0.04
+
+* Sun Nov 16 2008 Jérôme Quelin <jquelin@mandriva.org> 0.03-1mdv2009.1
++ Revision: 303648
+- update to new version 0.03
+
+* Tue Nov 04 2008 Jérôme Quelin <jquelin@mandriva.org> 0.02-1mdv2009.1
++ Revision: 299764
+- import perl-File-ShareDir-PAR
+
+
+* Tue Nov 04 2008 cpan2dist 0.02-1mdv
+- initial mdv release, generated with cpan2dist
 
