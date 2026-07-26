@@ -1,15 +1,13 @@
 %define upstream_name    File-ShareDir-PAR
-%define upstream_version 0.06
-
 Name:		perl-%{upstream_name}
-Version:	%{upstream_version}
-Release:	6
+Version:	0.06
+Release:	7
 
 Summary:	File::ShareDir with PAR support
 License:	GPL+ or Artistic
 Group:		Development/Perl
 Url:		https://metacpan.org/dist/File-ShareDir-PAR
-Source0:	https://cpan.metacpan.org/authors/id/S/SM/SMUELLER/File-ShareDir-PAR-%{upstream_version}.tar.gz
+Source0:	https://cpan.metacpan.org/authors/id/S/SM/SMUELLER/File-ShareDir-PAR-%{version}.tar.gz
 
 BuildRequires:	make
 BuildRequires:	perl-devel
@@ -44,7 +42,7 @@ one of the loaded '.par' files, that containing '.par' file is extracted
 and the path returned will point to the extracted copy on disk.
 
 %prep
-%setup -q -n %{upstream_name}-%{upstream_version}
+%setup -q -n %{upstream_name}-%{version}
 
 %build
 perl Makefile.PL INSTALLDIRS=vendor
@@ -72,8 +70,7 @@ make test
 
 * Tue Jul 28 2009 Jérôme Quelin <jquelin@mandriva.org> 0.50.0-1mdv2011.0
 + Revision: 401661
-- rebuild using %%perl_convert_version
-- fixed license field
+- rebuild using %0.06 fixed license field
 
 * Fri May 01 2009 Jérôme Quelin <jquelin@mandriva.org> 0.05-1mdv2010.0
 + Revision: 369686
